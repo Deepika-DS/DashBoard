@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="./images/logo_title.png">
+        <title>Profile DashBoard</title>
+        <link rel="stylesheet" href="./style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="main_content">
+            <div class="flex-bar">
+                <div class="flex-items">
+                    <div id="profileDetails">
+                        <img src="./images/profile.png" height="100" width="100">
+                        <div>D.O.C: 28.04.2023</div>
+                        <div>Status: complete</div>
+                        <button>Back home</button>
+                    </div>
+                </div>
+                <div class="flex-items">
+                    <div id="BeneficiaryDetails">
+                        <div class="toolbar">
+                            <button class="toobar-flex">Add Beneficiaries</button>
+                            <button class="toobar-flex">Add Asset</button>
+                            <button class="toobar-flex">Add Liability</button>
+                            <button class="toobar-flex">Create Links</button>
+                            <button class="toobar-flex">Add Signatures</button>
+                            <button class="toobar-flex">Will Generations</button>
+                        </div>
+                        <div class="beneficiaries-grid">
+                            <table class="table table-bordered" id="detailsTable">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Name</th>
+                                        <th>Relationship</th>
+                                        <th>Date of Birth</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Vaishnavi</td>
+                                        <td>Sister</td>
+                                        <td>1988-10-04</td>
+                                        <td>Active</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm">Edit</button>
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <div>
+                                <form id="beneficiaryForm">
+                                    <h3>Add New Beneficiary</h3>
+                                    <div>S.No</div>
+                                    <input type="text" id="sno" placeholder=" 3">
+                                    <div>First Name</div>
+                                    <input type="text" id="firstName" placeholder=" Ramya">
+                                    <div>Relationship</div>
+                                    <input type="text" id="relationship" placeholder=" Sister">
+                                    <div>Date of Birth</div>
+                                    <input type="date" id="dob" placeholder=" 14-07-2005">
+                                    <br>
+                                    <button type="button" id="addBeneficiaryBtn">Add Beneficiary</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("addBeneficiaryBtn").addEventListener("click", function() {
+                var sno = document.getElementById("sno").value;
+                var firstName = document.getElementById("firstName").value;
+                var relationship = document.getElementById("relationship").value;
+                var dob = document.getElementById("dob").value;
+                
+                if (!sno || !firstName || !relationship || !dob) {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+        
+                var table = document.getElementById("detailsTable").getElementsByTagName('tbody')[0];
+                var newRow = table.insertRow(table.rows.length);
+        
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                var cell5 = newRow.insertCell(4);
+                var cell6 = newRow.insertCell(5);
+        
+                cell1.textContent = sno;
+                cell2.textContent = firstName;
+                cell3.textContent = relationship;
+                cell4.textContent = dob;
+        
+                var status = "Active";  
+                cell5.textContent = status;
+        
+                if (status.toLowerCase() === "active") {
+                    cell5.style.color = "green";  
+                } else if (status.toLowerCase() === "inactive") {
+                    cell5.style.color = "red"; 
+                }
+        
+                var editBtn = document.createElement("button");
+                editBtn.classList.add("btn", "btn-primary", "btn-sm");
+                editBtn.textContent = "Edit";
+        
+                var deleteBtn = document.createElement("button");
+                deleteBtn.classList.add("btn", "btn-danger", "btn-sm");
+                deleteBtn.textContent = "Delete";
+        
+                cell6.appendChild(editBtn);
+                cell6.appendChild(deleteBtn);
+        
+                document.getElementById("beneficiaryForm").reset();
+            });
+        </script>
+        
+    </body>
+</html>
